@@ -73,6 +73,50 @@ const DAY_MASTER_DESC = {
   '癸': { element: '阴水', description: '如绵绵细雨 - 阴柔灵动、富有幻想、耐力十足' }
 }
 
+// MBTI 类型描述
+const MBTI_DESCRIPTIONS = {
+  'INTJ': { title: '建筑师', description: '富有想象力和战略性的思想家，一切皆在计划之中' },
+  'INTP': { title: '逻辑学家', description: '具有创造力的发明家，对知识有止不住的渴望' },
+  'ENTJ': { title: '指挥官', description: '大胆、富有想象力且意志强大的领导者' },
+  'ENTP': { title: '辩论家', description: '聪明好奇的思想者，不会放弃任何智力上的挑战' },
+  'INFJ': { title: '提倡者', description: '安静而神秘，同时鼓舞人心的理想主义者' },
+  'INFP': { title: '调停者', description: '诗意、善良的利他主义者，总是热情地帮助他人' },
+  'ENFJ': { title: '主人公', description: '富有魅力和鼓舞人心的领导者，能够吸引听众' },
+  'ENFP': { title: '竞选者', description: '热情、有创造力、爱社交的自由精神' },
+  'ISTJ': { title: '物流师', description: '实际且注重事实的个人，可靠性不容怀疑' },
+  'ISFJ': { title: '守卫者', description: '非常专注和热心的保护者，时刻准备着保护所爱之人' },
+  'ESTJ': { title: '总经理', description: '出色的管理者，在管理事情或人的方面无与伦比' },
+  'ESFJ': { title: '执政官', description: '极有同情心，爱社交、受欢迎的人' },
+  'ISTP': { title: '鉴赏家', description: '大胆而实际的实验家，擅长使用各种工具' },
+  'ISFP': { title: '探险家', description: '灵活有魅力的艺术家，时刻准备探索和体验' },
+  'ESTP': { title: '企业家', description: '聪明、精力充沛、善于感知的人' },
+  'ESFP': { title: '表演者', description: '自发的、精力充沛的娱乐者' }
+}
+  '乙': { '甲': '劫财', '乙': '比肩', '丙': '伤官', '丁': '食神', '戊': '正财', '己': '偏财', '庚': '正官', '辛': '七杀', '壬': '正印', '癸': '偏印' },
+  '丙': { '丙': '比肩', '丁': '劫财', '戊': '食神', '己': '伤官', '庚': '偏财', '辛': '正财', '壬': '七杀', '癸': '正官', '甲': '偏印', '乙': '正印' },
+  '丁': { '丙': '劫财', '丁': '比肩', '戊': '伤官', '己': '食神', '庚': '正财', '辛': '偏财', '壬': '正官', '癸': '七杀', '甲': '正印', '乙': '偏印' },
+  '戊': { '戊': '比肩', '己': '劫财', '庚': '食神', '辛': '伤官', '壬': '偏财', '癸': '正财', '甲': '七杀', '乙': '正官', '丙': '偏印', '丁': '正印' },
+  '己': { '戊': '劫财', '己': '比肩', '庚': '伤官', '辛': '食神', '壬': '正财', '癸': '偏财', '甲': '正官', '乙': '七杀', '丙': '正印', '丁': '偏印' },
+  '庚': { '庚': '比肩', '辛': '劫财', '壬': '食神', '癸': '伤官', '甲': '偏财', '乙': '正财', '丙': '七杀', '丁': '正官', '戊': '偏印', '己': '正印' },
+  '辛': { '庚': '劫财', '辛': '比肩', '壬': '伤官', '癸': '食神', '甲': '正财', '乙': '偏财', '丙': '正官', '丁': '七杀', '戊': '正印', '己': '偏印' },
+  '壬': { '壬': '比肩', '癸': '劫财', '甲': '食神', '乙': '伤官', '丙': '偏财', '丁': '正财', '戊': '七杀', '己': '正官', '庚': '偏印', '辛': '正印' },
+  '癸': { '壬': '劫财', '癸': '比肩', '甲': '伤官', '乙': '食神', '丙': '正财', '丁': '偏财', '戊': '正官', '己': '七杀', '庚': '正印', '辛': '偏印' }
+}
+
+// 日主描述
+const DAY_MASTER_DESC = {
+  '甲': { element: '阳木', description: '如参天大树 - 刚直不阿、志向高远、仁慈正直' },
+  '乙': { element: '阴木', description: '如柔韧花草 - 灵活变通、温柔委婉、适应力强' },
+  '丙': { element: '阳火', description: '如炽热太阳 - 热情开朗、光明磊落、急躁好胜' },
+  '丁': { element: '阴火', description: '如烛火灯光 - 内敛细腻、温文尔雅、富有同情心' },
+  '戊': { element: '阳土', description: '如厚重高山 - 稳重诚信、包容力强、固执保守' },
+  '己': { element: '阴土', description: '如田园沃土 - 柔顺和谐、多才多艺、疑心较重' },
+  '庚': { element: '阳金', description: '如刚硬刀剑 - 刚毅果断、讲究义气、好胜心强' },
+  '辛': { element: '阴金', description: '如名贵珠宝 - 秀气灵动、自尊心强、追求完美' },
+  '壬': { element: '阳水', description: '如奔腾江河 - 聪明机智、大气磅礴、随性而为' },
+  '癸': { element: '阴水', description: '如绵绵细雨 - 阴柔灵动、富有幻想、耐力十足' }
+}
+
 // ============ 神煞计算（完整版）============
 function getShenSha(dayGan, yearZhi, dayZhi, zhi) {
   const shensha = []
@@ -347,6 +391,29 @@ exports.main = async (event, context) => {
         return await calculateZiwei(data)
       case 'western':
         return await calculateWestern(data)
+      case 'mbti':
+        return calculateMBTI(data)
+      case 'all':
+        // 计算所有体系
+        const [bazi, ziwei, western] = await Promise.all([
+          calculateBazi(data.birthInfo),
+          calculateZiwei(data.birthInfo),
+          calculateWestern(data.birthInfo)
+        ])
+        let mbti = null
+        if (data.mbti) {
+          mbti = calculateMBTI(data.mbti)
+        }
+        return {
+          success: true,
+          data: {
+            bazi: bazi.data,
+            ziwei: ziwei.data,
+            western: western.data,
+            mbti: mbti ? mbti.data : null,
+            birthInfo: data.birthInfo
+          }
+        }
       default:
         return { success: false, message: '未知计算类型' }
     }
@@ -603,6 +670,107 @@ async function calculateWestern(birthInfo) {
         latitude: ecliptic.elat
       }
     })
+
+    // 计算相位
+    const aspects = []
+    const aspectTypes = [
+      { name: '合相', angle: 0, orb: 8 },
+      { name: '对分相', angle: 180, orb: 8 },
+      { name: '三分相', angle: 120, orb: 8 },
+      { name: '四分相', angle: 90, orb: 8 },
+      { name: '六分相', angle: 60, orb: 6 }
+    ]
+
+    for (let i = 0; i < planetPositions.length; i++) {
+      for (let j = i + 1; j < planetPositions.length; j++) {
+        const p1 = planetPositions[i]
+        const p2 = planetPositions[j]
+        
+        let diff = Math.abs(p1.longitude - p2.longitude)
+        if (diff > 180) diff = 360 - diff
+
+        for (const aspect of aspectTypes) {
+          if (Math.abs(diff - aspect.angle) <= aspect.orb) {
+            aspects.push({
+              name: `${p1.name}${aspect.name}${p2.name}`,
+              description: `${p1.name}与${p2.name}形成${aspect.name}`
+            })
+          }
+        }
+      }
+    }
+
+    // 星座判断
+    const monthDay = month * 100 + day
+    const signs = [
+      { name: '摩羯座', start: 1222, end: 119 },
+      { name: '水瓶座', start: 120, end: 218 },
+      { name: '双鱼座', start: 219, end: 320 },
+      { name: '白羊座', start: 321, end: 419 },
+      { name: '金牛座', start: 420, end: 520 },
+      { name: '双子座', start: 521, end: 621 },
+      { name: '巨蟹座', start: 622, end: 722 },
+      { name: '狮子座', start: 723, end: 822 },
+      { name: '处女座', start: 823, end: 922 },
+      { name: '天秤座', start: 923, end: 1023 },
+      { name: '天蝎座', start: 1024, end: 1122 },
+      { name: '射手座', start: 1123, end: 1221 }
+    ]
+    
+    let sunSign = '摩羯座'
+    for (const sign of signs) {
+      if (sign.start > sign.end) {
+        if (monthDay >= sign.start || monthDay <= sign.end) {
+          sunSign = sign.name
+          break
+        }
+      } else {
+        if (monthDay >= sign.start && monthDay <= sign.end) {
+          sunSign = sign.name
+          break
+        }
+      }
+    }
+
+    return {
+      success: true,
+      data: {
+        sunSign,
+        planetPositions: planetPositions.slice(0, 5),
+        aspects: aspects.slice(0, 5)
+      }
+    }
+  } catch (error) {
+    console.error('西方占星计算错误:', error)
+    return { success: false, message: error.message }
+  }
+}
+
+// MBTI 计算
+function calculateMBTI(mbtiData) {
+  const { energy, perception, judgment, lifestyle } = mbtiData
+  const type = energy + perception + judgment + lifestyle
+  
+  const description = MBTI_DESCRIPTIONS[type] || { 
+    title: '未知类型', 
+    description: '暂无描述' 
+  }
+  
+  return {
+    success: true,
+    data: {
+      type,
+      title: description.title,
+      description: description.description,
+      dimensions: {
+        energy: { letter: energy, name: energy === 'E' ? '外向' : '内向' },
+        perception: { letter: perception, name: perception === 'S' ? '实感' : '直觉' },
+        judgment: { letter: judgment, name: judgment === 'T' ? '思考' : '情感' },
+        lifestyle: { letter: lifestyle, name: lifestyle === 'J' ? '判断' : '感知' }
+      }
+    }
+  }
+}
 
     // 计算相位
     const aspects = []
