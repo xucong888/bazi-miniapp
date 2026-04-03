@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/result/result",
+    "pages/payment/payment",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1a1a1a",
+    "navigationBarTitleText": "悬壶承光",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#d4af37",
+    "backgroundColor": "#1a1a1a",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "排盘",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile-active.png"
+      }
+    ]
+  },
+  "cloud": true,
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于获取出生地经纬度，提高排盘精度"
+    }
+  },
+  "lazyCodeLoading": "requiredComponents"
+}

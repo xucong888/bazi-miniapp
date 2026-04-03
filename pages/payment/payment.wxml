@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="header">
+    <text class="title">充值积分</text>
+    <text class="subtitle">解锁AI深度解读</text>
+  </view>
+
+  <view class="package-list">
+    <view class="package-card" wx:for="{{packages}}" wx:key="id" bindtap="selectPackage" data-id="{{item.id}}">
+      <view class="package-header">
+        <text class="package-name">{{item.name}}</text>
+        <text class="package-price">¥{{item.price}}</text>
+      </view>
+      
+      <view class="package-points">
+        <text class="points-value">{{item.points}}</text>
+        <text class="points-label">积分</text>
+      </view>
+      
+      <view class="package-desc">{{item.desc}}</view>
+      
+      <button class="btn-buy">立即购买</button>
+    </view>
+  </view>
+
+  <view class="tips">
+    <text>充值即表示同意《用户协议》和《隐私政策》</text>
+  </view>
+</view>

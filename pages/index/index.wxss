@@ -1,0 +1,73 @@
+.header {
+  text-align: center;
+  padding: 60rpx 0;
+}
+
+.title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #d4af37;
+  margin-bottom: 16rpx;
+}
+
+.subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.radio-group {
+  display: flex;
+  gap: 40rpx;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.picker-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24rpx;
+}
+
+.picker-item {
+  flex: 1;
+  min-width: 140rpx;
+}
+
+.picker-label {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 12rpx;
+}
+
+.picker-value {
+  background: #f8f8f8;
+  padding: 20rpx 24rpx;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #333;
+  text-align: center;
+}
+
+.btn-primary {
+  margin-top: 48rpx;
+  width: 100%;
+}
+
+.tips {
+  text-align: center;
+  margin-top: 32rpx;
+}
+
+.tips text {
+  font-size: 24rpx;
+  color: #999;
+}

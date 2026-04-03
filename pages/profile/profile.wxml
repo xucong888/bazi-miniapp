@@ -1,0 +1,43 @@
+<view class="container">
+  <view class="user-card">
+    <view wx:if="{{userInfo}}">
+      <image class="avatar" src="{{userInfo.avatarUrl}}" />
+      <text class="nickname">{{userInfo.nickName}}</text>
+    </view>
+    
+    <view wx:else class="login-section">
+      <button class="btn-login" bindtap="getUserProfile">微信登录</button>
+    </view>
+  </view>
+
+  <view class="points-card">
+    <view class="points-header">
+      <text class="points-label">我的积分</text>
+      <view class="points-value">{{points}}</view>
+    </view>
+    
+    <button class="btn-recharge" bindtap="goToPayment">充值</button>
+  </view>
+
+  <view class="menu-list">
+    <view class="menu-item">
+      <text class="menu-text">排盘历史</text>
+      <text class="menu-arrow">></text>
+    </view>
+    
+    <view class="menu-item">
+      <text class="menu-text">AI解读记录</text>
+      <text class="menu-arrow">></text>
+    </view>
+    
+    <view class="menu-item">
+      <text class="menu-text">联系客服</text>
+      <text class="menu-arrow">></text>
+    </view>
+    
+    <view class="menu-item">
+      <text class="menu-text">关于我们</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+</view>

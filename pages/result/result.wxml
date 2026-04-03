@@ -1,0 +1,144 @@
+<view class="container" wx:if="{{result}}">
+  <!-- 标签切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{activeTab === 'bazi' ? 'active' : ''}}" bindtap="switchTab" data-tab="bazi">八字</view>
+    <view class="tab-item {{activeTab === 'ziwei' ? 'active' : ''}}" bindtap="switchTab" data-tab="ziwei">紫微</view>
+    <view class="tab-item {{activeTab === 'western' ? 'active' : ''}}" bindtap="switchTab" data-tab="western">星盘</view>
+  </view>
+
+  <!-- 八字结果 -->
+  <view wx:if="{{activeTab === 'bazi'}}">
+    <view class="card">
+      <view class="card-title">八字命盘</view>
+      
+      <view class="bazi-pillar">
+        <view class="pillar-column">
+          <view class="pillar-title">年柱</view>
+          <view class="pillar-gan">{{result.bazi.pillars.year.gan}}</view>
+          <view class="pillar-zhi">{{result.bazi.pillars.year.zhi}}</view>
+        </view>
+        <view class="pillar-column">
+          <view class="pillar-title">月柱</view>
+          <view class="pillar-gan">{{result.bazi.pillars.month.gan}}</view>
+          <view class="pillar-zhi">{{result.bazi.pillars.month.zhi}}</view>
+        </view>
+        <view class="pillar-column">
+          <view class="pillar-title">日柱</view>
+          <view class="pillar-gan">{{result.bazi.pillars.day.gan}}</view>
+          <view class="pillar-zhi">{{result.bazi.pillars.day.zhi}}</view>
+        </view>
+        <view class="pillar-column">
+          <view class="pillar-title">时柱</view>
+          <view class="pillar-gan">{{result.bazi.pillars.hour.gan}}</view>
+          <view class="pillar-zhi">{{result.bazi.pillars.hour.zhi}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">五行分析</view>
+      <view class="wuxing-list">
+        <view class="wuxing-item" wx:for="{{result.bazi.fiveElements}}" wx:for-item="item" wx:for-index="key">
+          <view class="wuxing-name">{{key}}</view>
+          <view class="wuxing-bar">
+            <view class="wuxing-fill" style="width: {{item.percentage}}%; background: {{key === '木' ? '#4CAF50' : key === '火' ? '#FF5722' : key === '土' ? '#FF9800' : key === '金' ? '#9E9E9E' : '#2196F3'}}"></view>
+          </view>
+          <view class="wuxing-value">{{item.percentage}}%</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">日主信息</view>
+      <view class="daymaster-info">
+        <view class="dm-title">{{result.bazi.dayMaster.element}} · {{result.bazi.dayMaster.strength}}</view>
+        <view class="dm-desc">{{result.bazi.dayMaster.description}}</view>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{result.bazi.xiYongShen}}">
+      <view class="card-title">喜用神</view>
+      <view class="xiyong-list">
+        <view class="xiyong-item">
+          <text class="xiyong-label">用神：</text>
+          <text class="xiyong-value">{{result.bazi.xiYongShen.yongShen}}</text>
+        </view>
+        <view class="xiyong-item">
+          <text class="xiyong-label">喜神：</text>
+          <text class="xiyong-value">{{result.bazi.xiYongShen.xiShen}}</text>
+        </view>
+        <view class="xiyong-item">
+          <text class="xiyong-label">忌神：</text>
+          <text class="xiyong-value">{{result.bazi.xiYongShen.jiShen}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 紫微结果 -->
+  <view wx:if="{{activeTab === 'ziwei'}}">
+    <view class="card">
+      <view class="card-title">紫微斗数</view>
+      <view class="ziwei-info">
+        <view class="ziwei-item">
+          <text class="ziwei-label">命宫主星：</text>
+          <text class="ziwei-value">{{result.ziwei.lifeMaster}}</text>
+        </view>
+        <view class="ziwei-item">
+          <text class="ziwei-label">身宫主星：</text>
+          <text class="ziwei-value">{{result.ziwei.bodyMaster}}</text>
+        </view>
+        <view class="ziwei-item">
+          <text class="ziwei-label">生肖：</text>
+          <text class="ziwei-value">{{result.ziwei.zodiac}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="card-title">十二宫位</view>
+      <view class="palace-list">
+        <view class="palace-item" wx:for="{{result.ziwei.palaces}}" wx:key="index">
+          <view class="palace-name">{{item.name}}</view>
+          <view class="palace-ganzhi">{{item.gan}}{{item.zhi}}</view>
+          <view class="palace-stars" wx:if="{{item.majorStars.length > 0}}">
+            <text wx:for="{{item.majorStars}}" wx:key="name" class="star-tag">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 西方占星结果 -->
+  <view wx:if="{{activeTab === 'western'}}">
+    <view class="card">
+      <view class="card-title">西方星盘</view>
+      <view class="western-info">
+        <view class="western-item">
+          <text class="western-label">太阳星座：</text>
+          <text class="western-value">{{result.western.sunSign}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{result.western.aspects.length > 0}}">
+      <view class="card-title">主要相位</view>
+      <view class="aspect-list">
+        <view class="aspect-item" wx:for="{{result.western.aspects}}" wx:key="name">
+          <text class="aspect-name">{{item.name}}</text>
+          <text class="aspect-desc">{{item.description}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI解读按钮 -->
+  <view class="card">
+    <view class="card-title">AI深度解读</view>
+    <view class="ai-intro">
+      <text>获取专业的命理分析报告，包含性格、事业、感情、财运等详细解读</text>
+    </view>
+    
+    <button class="btn-primary" bindtap="goToPayment">解锁AI解读（100积分）</button>
+  </view>
+</view>

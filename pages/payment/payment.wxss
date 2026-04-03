@@ -1,0 +1,96 @@
+.header {
+  text-align: center;
+  padding: 60rpx 0;
+}
+
+.title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #d4af37;
+  margin-bottom: 16rpx;
+}
+
+.subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.package-list {
+  padding: 0 20rpx;
+}
+
+.package-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.08);
+}
+
+.package-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.package-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.package-price {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #d4af37;
+}
+
+.package-points {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 16rpx;
+}
+
+.points-value {
+  font-size: 56rpx;
+  font-weight: bold;
+  color: #333;
+  margin-right: 12rpx;
+}
+
+.points-label {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.package-desc {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 24rpx;
+}
+
+.btn-buy {
+  background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+  color: #fff;
+  border-radius: 8rpx;
+  padding: 24rpx 0;
+  font-size: 32rpx;
+  border: none;
+}
+
+.btn-buy::after {
+  border: none;
+}
+
+.tips {
+  text-align: center;
+  padding: 32rpx;
+}
+
+.tips text {
+  font-size: 24rpx;
+  color: #999;
+}
