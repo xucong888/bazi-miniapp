@@ -1,108 +1,210 @@
-<view class="container" wx:if="{{result}}">
+<view class="page-wrapper" wx:if="{{result}}">
+  <!-- 头部信息 -->
+  <view class="result-header">
+    <view class="header-content">
+      <text class="result-title">测算结果</text>
+      <view class="birth-info">
+        <text>{{result.birthInfo.name}} · {{result.birthInfo.gender === 'male' ? '男' : '女'}}</text>
+        <text class="birth-date">{{result.birthInfo.year}}年{{result.birthInfo.month}}月{{result.birthInfo.day}}日 {{result.birthInfo.hour}}时</text>
+      </view>
+    </view>
+  </view>
+
   <!-- 标签切换 -->
   <view class="tab-bar">
-    <view class="tab-item {{activeTab === 'bazi' ? 'active' : ''}}" bindtap="switchTab" data-tab="bazi">八字</view>
-    <view class="tab-item {{activeTab === 'ziwei' ? 'active' : ''}}" bindtap="switchTab" data-tab="ziwei">紫微</view>
-    <view class="tab-item {{activeTab === 'western' ? 'active' : ''}}" bindtap="switchTab" data-tab="western">星盘</view>
+    <view 
+      wx:if="{{selectedSystems.includes('bazi')}}"
+      class="tab-item {{activeTab === 'bazi' ? 'active' : ''}}"
+      bindtap="switchTab"
+      data-tab="bazi"
+    >
+      <text class="tab-icon">☯</text>
+      <text>八字</text>
+    </view>
+    
+    <view 
+      wx:if="{{selectedSystems.includes('ziwei')}}"
+      class="tab-item {{activeTab === 'ziwei' ? 'active' : ''}}"
+      bindtap="switchTab"
+      data-tab="ziwei"
+    >
+      <text class="tab-icon">⭐</text>
+      <text>紫微</text>
+    </view>
+    
+    <view 
+      wx:if="{{selectedSystems.includes('western')}}"
+      class="tab-item {{activeTab === 'western' ? 'active' : ''}}"
+      bindtap="switchTab"
+      data-tab="western"
+    >
+      <text class="tab-icon">🌙</text>
+      <text>占星</text>
+    </view>
+    
+    <view 
+      wx:if="{{result.mbti}}"
+      class="tab-item {{activeTab === 'mbti' ? 'active' : ''}}"
+      bindtap="switchTab"
+      data-tab="mbti"
+    >
+      <text class="tab-icon">🧠</text>
+      <text>MBTI</text>
+    </view>
   </view>
 
   <!-- 八字结果 -->
-  <view wx:if="{{activeTab === 'bazi'}}">
-    <view class="card">
-      <view class="card-title">八字命盘</view>
+  <view class="result-content" wx:if="{{activeTab === 'bazi'}}">
+    <!-- 四柱 -->
+    <view class="result-card">
+      <view class="card-header">
+        <text class="card-title">四柱命盘</text>
+      </view>
       
       <view class="bazi-pillar">
-        <view class="pillar-column">
-          <view class="pillar-title">年柱</view>
-          <view class="pillar-gan">{{result.bazi.pillars.year.gan}}</view>
-          <view class="pillar-zhi">{{result.bazi.pillars.year.zhi}}</view>
+        <view class="pillar-item">
+          <text class="pillar-label">年柱</text>
+          <view class="pillar-content">
+            <text class="pillar-gan">{{result.bazi.pillars.year.gan}}</text>
+            <text class="pillar-zhi">{{result.bazi.pillars.year.zhi}}</text>
+          </view>
+          <text class="pillar-shishen">{{result.bazi.pillars.year.tenGod}}</text>
         </view>
-        <view class="pillar-column">
-          <view class="pillar-title">月柱</view>
-          <view class="pillar-gan">{{result.bazi.pillars.month.gan}}</view>
-          <view class="pillar-zhi">{{result.bazi.pillars.month.zhi}}</view>
+        
+        <view class="pillar-item">
+          <text class="pillar-label">月柱</text>
+          <view class="pillar-content">
+            <text class="pillar-gan">{{result.bazi.pillars.month.gan}}</text>
+            <text class="pillar-zhi">{{result.bazi.pillars.month.zhi}}</text>
+          </view>
+          <text class="pillar-shishen">{{result.bazi.pillars.month.tenGod}}</text>
         </view>
-        <view class="pillar-column">
-          <view class="pillar-title">日柱</view>
-          <view class="pillar-gan">{{result.bazi.pillars.day.gan}}</view>
-          <view class="pillar-zhi">{{result.bazi.pillars.day.zhi}}</view>
+        
+        <view class="pillar-item highlight">
+          <text class="pillar-label">日柱</text>
+          <view class="pillar-content">
+            <text class="pillar-gan">{{result.bazi.pillars.day.gan}}</text>
+            <text class="pillar-zhi">{{result.bazi.pillars.day.zhi}}</text>
+          </view>
+          <text class="pillar-shishen">日主</text>
         </view>
-        <view class="pillar-column">
-          <view class="pillar-title">时柱</view>
-          <view class="pillar-gan">{{result.bazi.pillars.hour.gan}}</view>
-          <view class="pillar-zhi">{{result.bazi.pillars.hour.zhi}}</view>
+        
+        <view class="pillar-item">
+          <text class="pillar-label">时柱</text>
+          <view class="pillar-content">
+            <text class="pillar-gan">{{result.bazi.pillars.hour.gan}}</text>
+            <text class="pillar-zhi">{{result.bazi.pillars.hour.zhi}}</text>
+          </view>
+          <text class="pillar-shishen">{{result.bazi.pillars.hour.tenGod}}</text>
         </view>
       </view>
     </view>
 
-    <view class="card">
-      <view class="card-title">五行分析</view>
+    <!-- 五行 -->
+    <view class="result-card">
+      <view class="card-header">
+        <text class="card-title">五行分析</text>
+      </view>
+      
       <view class="wuxing-list">
         <view class="wuxing-item" wx:for="{{result.bazi.fiveElements}}" wx:for-item="item" wx:for-index="key">
-          <view class="wuxing-name">{{key}}</view>
+          <text class="wuxing-name">{{key}}</text>
           <view class="wuxing-bar">
-            <view class="wuxing-fill" style="width: {{item.percentage}}%; background: {{key === '木' ? '#4CAF50' : key === '火' ? '#FF5722' : key === '土' ? '#FF9800' : key === '金' ? '#9E9E9E' : '#2196F3'}}"></view>
+            <view class="wuxing-fill {{key}}" style="width: {{item.percentage}}%"></view>
           </view>
-          <view class="wuxing-value">{{item.percentage}}%</view>
+          <view class="wuxing-info">
+            <text class="wuxing-percent">{{item.percentage}}%</text>
+            <text class="wuxing-strength">{{item.strength}}</text>
+          </view>
         </view>
       </view>
     </view>
 
-    <view class="card">
-      <view class="card-title">日主信息</view>
-      <view class="daymaster-info">
-        <view class="dm-title">{{result.bazi.dayMaster.element}} · {{result.bazi.dayMaster.strength}}</view>
-        <view class="dm-desc">{{result.bazi.dayMaster.description}}</view>
+    <!-- 日主 -->
+    <view class="result-card">
+      <view class="card-header">
+        <text class="card-title">日主分析</text>
+      </view>
+      
+      <view class="daymaster-section">
+        <view class="daymaster-header">
+          <text class="daymaster-gan">{{result.bazi.pillars.day.gan}}</text>
+          <view class="daymaster-info">
+            <text class="daymaster-element">{{result.bazi.dayMaster.element}}</text>
+            <text class="daymaster-strength">{{result.bazi.dayMaster.strength}}</text>
+          </view>
+        </view>
+        <text class="daymaster-desc">{{result.bazi.dayMaster.description}}</text>
       </view>
     </view>
 
-    <view class="card" wx:if="{{result.bazi.xiYongShen}}">
-      <view class="card-title">喜用神</view>
+    <!-- 喜用神 -->
+    <view class="result-card" wx:if="{{result.bazi.xiYongShen}}">
+      <view class="card-header">
+        <text class="card-title">喜用神</text>
+      </view>
+      
       <view class="xiyong-list">
         <view class="xiyong-item">
-          <text class="xiyong-label">用神：</text>
+          <text class="xiyong-label">用神</text>
           <text class="xiyong-value">{{result.bazi.xiYongShen.yongShen}}</text>
         </view>
+        
         <view class="xiyong-item">
-          <text class="xiyong-label">喜神：</text>
+          <text class="xiyong-label">喜神</text>
           <text class="xiyong-value">{{result.bazi.xiYongShen.xiShen}}</text>
         </view>
+        
         <view class="xiyong-item">
-          <text class="xiyong-label">忌神：</text>
-          <text class="xiyong-value">{{result.bazi.xiYongShen.jiShen}}</text>
+          <text class="xiyong-label">忌神</text>
+          <text class="xiyong-value ji">{{result.bazi.xiYongShen.jiShen}}</text>
         </view>
       </view>
     </view>
   </view>
 
   <!-- 紫微结果 -->
-  <view wx:if="{{activeTab === 'ziwei'}}">
-    <view class="card">
-      <view class="card-title">紫微斗数</view>
+  <view class="result-content" wx:if="{{activeTab === 'ziwei'}}">
+    <view class="result-card">
+      <view class="card-header">
+        <text class="card-title">紫微命盘</text>
+      </view>
+      
       <view class="ziwei-info">
-        <view class="ziwei-item">
-          <text class="ziwei-label">命宫主星：</text>
-          <text class="ziwei-value">{{result.ziwei.lifeMaster}}</text>
+        <view class="info-item">
+          <text class="info-label">命宫主星</text>
+          <text class="info-value">{{result.ziwei.lifeMaster}}</text>
         </view>
-        <view class="ziwei-item">
-          <text class="ziwei-label">身宫主星：</text>
-          <text class="ziwei-value">{{result.ziwei.bodyMaster}}</text>
+        
+        <view class="info-item">
+          <text class="info-label">身宫主星</text>
+          <text class="info-value">{{result.ziwei.bodyMaster}}</text>
         </view>
-        <view class="ziwei-item">
-          <text class="ziwei-label">生肖：</text>
-          <text class="ziwei-value">{{result.ziwei.zodiac}}</text>
+        
+        <view class="info-item">
+          <text class="info-label">生肖</text>
+          <text class="info-value">{{result.ziwei.zodiac}}</text>
         </view>
       </view>
     </view>
 
-    <view class="card">
-      <view class="card-title">十二宫位</view>
+    <view class="result-card">
+      <view class="card-header">
+        <text class="card-title">十二宫位</text>
+      </view>
+      
       <view class="palace-list">
         <view class="palace-item" wx:for="{{result.ziwei.palaces}}" wx:key="index">
-          <view class="palace-name">{{item.name}}</view>
-          <view class="palace-ganzhi">{{item.gan}}{{item.zhi}}</view>
+          <view class="palace-header">
+            <text class="palace-name">{{item.name}}</text>
+            <text class="palace-ganzhi">{{item.gan}}{{item.zhi}}</text>
+          </view>
+          
           <view class="palace-stars" wx:if="{{item.majorStars.length > 0}}">
-            <text wx:for="{{item.majorStars}}" wx:key="name" class="star-tag">{{item.name}}</text>
+            <view class="star-tag" wx:for="{{item.majorStars}}" wx:for-item="star" wx:key="name">
+              <text>{{star.name}}</text>
+              <text wx:if="{{star.brightness}}" class="star-brightness">{{star.brightness}}</text>
+            </view>
           </view>
         </view>
       </view>
@@ -110,19 +212,23 @@
   </view>
 
   <!-- 西方占星结果 -->
-  <view wx:if="{{activeTab === 'western'}}">
-    <view class="card">
-      <view class="card-title">西方星盘</view>
-      <view class="western-info">
-        <view class="western-item">
-          <text class="western-label">太阳星座：</text>
-          <text class="western-value">{{result.western.sunSign}}</text>
-        </view>
+  <view class="result-content" wx:if="{{activeTab === 'western'}}">
+    <view class="result-card">
+      <view class="card-header">
+        <text class="card-title">星盘信息</text>
+      </view>
+      
+      <view class="western-sunsign">
+        <text class="sunsign-icon">☀</text>
+        <text class="sunsign-name">{{result.western.sunSign}}</text>
       </view>
     </view>
 
-    <view class="card" wx:if="{{result.western.aspects.length > 0}}">
-      <view class="card-title">主要相位</view>
+    <view class="result-card" wx:if="{{result.western.aspects.length > 0}}">
+      <view class="card-header">
+        <text class="card-title">主要相位</text>
+      </view>
+      
       <view class="aspect-list">
         <view class="aspect-item" wx:for="{{result.western.aspects}}" wx:key="name">
           <text class="aspect-name">{{item.name}}</text>
@@ -132,13 +238,62 @@
     </view>
   </view>
 
-  <!-- AI解读按钮 -->
-  <view class="card">
-    <view class="card-title">AI深度解读</view>
-    <view class="ai-intro">
-      <text>获取专业的命理分析报告，包含性格、事业、感情、财运等详细解读</text>
+  <!-- MBTI 结果 -->
+  <view class="result-content" wx:if="{{activeTab === 'mbti'}}">
+    <view class="result-card">
+      <view class="mbti-header">
+        <text class="mbti-type">{{result.mbti.type}}</text>
+        <text class="mbti-title">{{result.mbti.title}}</text>
+      </view>
+      
+      <text class="mbti-desc">{{result.mbti.description}}</text>
     </view>
-    
-    <button class="btn-primary" bindtap="goToPayment">解锁AI解读（100积分）</button>
+
+    <view class="result-card">
+      <view class="card-header">
+        <text class="card-title">维度分析</text>
+      </view>
+      
+      <view class="dimension-list">
+        <view class="dimension-item">
+          <text class="dimension-label">能量来源</text>
+          <view class="dimension-bar">
+            <view class="dimension-option {{result.mbti.dimensions.energy.letter === 'E' ? 'active' : ''}}">E 外向</view>
+            <view class="dimension-option {{result.mbti.dimensions.energy.letter === 'I' ? 'active' : ''}}">I 内向</view>
+          </view>
+        </view>
+        
+        <view class="dimension-item">
+          <text class="dimension-label">认知方式</text>
+          <view class="dimension-bar">
+            <view class="dimension-option {{result.mbti.dimensions.perception.letter === 'S' ? 'active' : ''}}">S 实感</view>
+            <view class="dimension-option {{result.mbti.dimensions.perception.letter === 'N' ? 'active' : ''}}">N 直觉</view>
+          </view>
+        </view>
+        
+        <view class="dimension-item">
+          <text class="dimension-label">判断方式</text>
+          <view class="dimension-bar">
+            <view class="dimension-option {{result.mbti.dimensions.judgment.letter === 'T' ? 'active' : ''}}">T 思考</view>
+            <view class="dimension-option {{result.mbti.dimensions.judgment.letter === 'F' ? 'active' : ''}}">F 情感</view>
+          </view>
+        </view>
+        
+        <view class="dimension-item">
+          <text class="dimension-label">生活方式</text>
+          <view class="dimension-bar">
+            <view class="dimension-option {{result.mbti.dimensions.lifestyle.letter === 'J' ? 'active' : ''}}">J 判断</view>
+            <view class="dimension-option {{result.mbti.dimensions.lifestyle.letter === 'P' ? 'active' : ''}}">P 感知</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="result-actions">
+    <button class="action-btn primary" bindtap="recalculate">
+      <text>重新测算</text>
+    </button>
   </view>
 </view>

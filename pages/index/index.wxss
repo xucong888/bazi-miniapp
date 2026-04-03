@@ -205,6 +205,110 @@
   transform: rotate(90deg);
 }
 
+/* 测算体系网格 */
+.system-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.system-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32rpx 20rpx;
+  background: #f5f3f0;
+  border-radius: 20rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+}
+
+.system-item.active {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: #d4af37;
+}
+
+.system-icon {
+  font-size: 48rpx;
+  margin-bottom: 12rpx;
+}
+
+.system-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4rpx;
+}
+
+.system-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.system-item.active .system-name {
+  color: #b8941f;
+}
+
+/* MBTI 网格 */
+.mbti-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.mbti-dimension {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.mbti-label {
+  width: 140rpx;
+  font-size: 28rpx;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.mbti-options {
+  flex: 1;
+  display: flex;
+  gap: 16rpx;
+}
+
+.mbti-btn {
+  flex: 1;
+  padding: 20rpx 0;
+  text-align: center;
+  background: #f5f3f0;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #666;
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+}
+
+.mbti-btn.active {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: #d4af37;
+  color: #b8941f;
+  font-weight: 600;
+}
+
+.mbti-result {
+  margin-top: 32rpx;
+  text-align: center;
+  padding: 24rpx;
+  background: #1a1a1a;
+  border-radius: 16rpx;
+}
+
+.mbti-type {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #d4af37;
+  letter-spacing: 8rpx;
+}
+
 /* 操作区域 */
 .action-area {
   padding: 20rpx 0;

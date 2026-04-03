@@ -1,226 +1,460 @@
+/* 结果页样式 */
+.page-wrapper {
+  min-height: 100vh;
+  background: #faf9f7;
+  padding-bottom: 140rpx;
+}
+
+/* 结果头部 */
+.result-header {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  padding: 60rpx 40rpx;
+  position: relative;
+}
+
+.result-header::after {
+  content: '';
+  position: absolute;
+  bottom: -40rpx;
+  left: 0;
+  right: 0;
+  height: 80rpx;
+  background: #faf9f7;
+  border-radius: 40rpx 40rpx 0 0;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.result-title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 24rpx;
+}
+
+.birth-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.birth-info text {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.birth-date {
+  color: #d4af37 !important;
+}
+
+/* 标签栏 */
 .tab-bar {
   display: flex;
-  background: #fff;
-  border-radius: 16rpx;
-  margin-bottom: 24rpx;
-  overflow: hidden;
+  padding: 0 32rpx;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+  position: relative;
+  z-index: 1;
 }
 
 .tab-item {
   flex: 1;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 24rpx 0;
-  font-size: 30rpx;
-  color: #666;
-  border-bottom: 4rpx solid transparent;
+  background: #fff;
+  border-radius: 16rpx;
+  border: 2rpx solid transparent;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
 
 .tab-item.active {
-  color: #d4af37;
-  border-bottom-color: #d4af37;
-  font-weight: bold;
+  background: #1a1a1a;
+  border-color: #d4af37;
 }
 
-.bazi-pillar {
-  display: flex;
-  justify-content: space-around;
-  padding: 32rpx 0;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  border-radius: 16rpx;
+.tab-icon {
+  font-size: 36rpx;
+  margin-bottom: 8rpx;
 }
 
-.pillar-column {
-  text-align: center;
+.tab-item text:last-child {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.tab-item.active text:last-child {
   color: #fff;
 }
 
-.pillar-title {
+/* 结果内容 */
+.result-content {
+  padding: 0 32rpx;
+}
+
+/* 结果卡片 */
+.result-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+  margin-bottom: 32rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.card-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6rpx;
+  height: 32rpx;
+  background: #d4af37;
+  border-radius: 3rpx;
+}
+
+/* 八字四柱 */
+.bazi-pillar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.pillar-item {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 16rpx;
+  background: #f5f3f0;
+  border-radius: 16rpx;
+}
+
+.pillar-item.highlight {
+  background: #1a1a1a;
+}
+
+.pillar-label {
+  display: block;
   font-size: 24rpx;
-  color: #d4af37;
+  color: #999;
   margin-bottom: 16rpx;
 }
 
-.pillar-gan {
-  font-size: 56rpx;
-  font-weight: bold;
-  margin-bottom: 12rpx;
-}
-
-.pillar-zhi {
-  font-size: 56rpx;
-  font-weight: bold;
+.pillar-item.highlight .pillar-label {
   color: #d4af37;
 }
 
+.pillar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  margin-bottom: 12rpx;
+}
+
+.pillar-gan {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.pillar-item.highlight .pillar-gan {
+  color: #fff;
+}
+
+.pillar-zhi {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #d4af37;
+}
+
+.pillar-shishen {
+  font-size: 22rpx;
+  color: #999;
+  padding: 4rpx 12rpx;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8rpx;
+}
+
+.pillar-item.highlight .pillar-shishen {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 五行分析 */
 .wuxing-list {
-  padding: 16rpx 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
 }
 
 .wuxing-item {
   display: flex;
   align-items: center;
-  margin-bottom: 24rpx;
+  gap: 20rpx;
 }
 
 .wuxing-name {
   width: 60rpx;
   font-size: 32rpx;
-  font-weight: bold;
+  font-weight: 600;
+  text-align: center;
 }
 
 .wuxing-bar {
   flex: 1;
-  height: 24rpx;
-  background: #f0f0f0;
-  border-radius: 12rpx;
-  margin: 0 24rpx;
+  height: 16rpx;
+  background: #f5f3f0;
+  border-radius: 8rpx;
   overflow: hidden;
 }
 
 .wuxing-fill {
   height: 100%;
-  border-radius: 12rpx;
-  transition: width 0.3s ease;
+  border-radius: 8rpx;
+  transition: width 0.5s ease;
 }
 
-.wuxing-value {
-  width: 100rpx;
-  text-align: right;
+.wuxing-fill.木 { background: #52c41a; }
+.wuxing-fill.火 { background: #f5222d; }
+.wuxing-fill.土 { background: #faad14; }
+.wuxing-fill.金 { background: #fa8c16; }
+.wuxing-fill.水 { background: #1890ff; }
+
+.wuxing-info {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  width: 140rpx;
+  justify-content: flex-end;
+}
+
+.wuxing-percent {
   font-size: 28rpx;
-  color: #666;
+  font-weight: 600;
+  color: #333;
 }
 
-.daymaster-info {
-  text-align: center;
+.wuxing-strength {
+  font-size: 24rpx;
+  color: #999;
+  padding: 4rpx 12rpx;
+  background: #f5f3f0;
+  border-radius: 8rpx;
+}
+
+/* 日主分析 */
+.daymaster-section {
   padding: 24rpx 0;
 }
 
-.dm-title {
-  font-size: 40rpx;
-  font-weight: bold;
-  color: #d4af37;
-  margin-bottom: 16rpx;
+.daymaster-header {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  margin-bottom: 24rpx;
 }
 
-.dm-desc {
+.daymaster-gan {
+  width: 100rpx;
+  height: 100rpx;
+  background: #1a1a1a;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56rpx;
+  font-weight: 700;
+  color: #d4af37;
+}
+
+.daymaster-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.daymaster-element {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.daymaster-strength {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.daymaster-desc {
   font-size: 28rpx;
   color: #666;
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
+/* 喜用神 */
 .xiyong-list {
-  padding: 16rpx 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
 }
 
 .xiyong-item {
   display: flex;
-  padding: 16rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
-}
-
-.xiyong-item:last-child {
-  border-bottom: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx;
+  background: #f5f3f0;
+  border-radius: 16rpx;
 }
 
 .xiyong-label {
-  width: 120rpx;
-  font-size: 30rpx;
-  color: #666;
-}
-
-.xiyong-value {
-  flex: 1;
-  font-size: 30rpx;
-  font-weight: bold;
-  color: #333;
-}
-
-.ziwei-info, .western-info {
-  padding: 16rpx 0;
-}
-
-.ziwei-item, .western-item {
-  display: flex;
-  padding: 16rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
-}
-
-.ziwei-item:last-child, .western-item:last-child {
-  border-bottom: none;
-}
-
-.ziwei-label, .western-label {
-  width: 200rpx;
-  font-size: 30rpx;
-  color: #666;
-}
-
-.ziwei-value, .western-value {
-  flex: 1;
-  font-size: 30rpx;
-  font-weight: bold;
-  color: #d4af37;
-}
-
-.palace-list {
-  padding: 16rpx 0;
-}
-
-.palace-item {
-  display: flex;
-  align-items: center;
-  padding: 20rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
-}
-
-.palace-item:last-child {
-  border-bottom: none;
-}
-
-.palace-name {
-  width: 120rpx;
-  font-size: 30rpx;
-  font-weight: bold;
-  color: #333;
-}
-
-.palace-ganzhi {
-  width: 100rpx;
   font-size: 28rpx;
   color: #666;
 }
 
+.xiyong-value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #d4af37;
+}
+
+.xiyong-value.ji {
+  color: #f5222d;
+}
+
+/* 紫微斗数 */
+.ziwei-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx;
+  background: #f5f3f0;
+  border-radius: 16rpx;
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.info-value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 十二宫位 */
+.palace-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.palace-item {
+  padding: 24rpx;
+  background: #f5f3f0;
+  border-radius: 16rpx;
+}
+
+.palace-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.palace-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.palace-ganzhi {
+  font-size: 26rpx;
+  color: #999;
+}
+
 .palace-stars {
-  flex: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 12rpx;
 }
 
 .star-tag {
-  background: #d4af37;
-  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8rpx;
   padding: 8rpx 16rpx;
+  background: #1a1a1a;
   border-radius: 8rpx;
-  font-size: 24rpx;
+}
+
+.star-tag text:first-child {
+  font-size: 26rpx;
+  color: #d4af37;
+}
+
+.star-brightness {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 西方占星 */
+.western-sunsign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 0;
+}
+
+.sunsign-icon {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.sunsign-name {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #333;
 }
 
 .aspect-list {
-  padding: 16rpx 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
 }
 
 .aspect-item {
-  padding: 20rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
-}
-
-.aspect-item:last-child {
-  border-bottom: none;
+  padding: 24rpx;
+  background: #f5f3f0;
+  border-radius: 16rpx;
 }
 
 .aspect-name {
-  font-size: 30rpx;
-  font-weight: bold;
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
   color: #333;
   margin-bottom: 8rpx;
 }
@@ -230,9 +464,115 @@
   color: #666;
 }
 
-.ai-intro {
-  padding: 16rpx 0 32rpx;
+/* MBTI */
+.mbti-header {
+  text-align: center;
+  padding: 40rpx 0;
+  background: #1a1a1a;
+  border-radius: 20rpx;
+  margin-bottom: 32rpx;
+}
+
+.mbti-type {
+  display: block;
+  font-size: 64rpx;
+  font-weight: 700;
+  color: #d4af37;
+  letter-spacing: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.mbti-title {
+  font-size: 32rpx;
+  color: #fff;
+}
+
+.mbti-desc {
   font-size: 28rpx;
   color: #666;
-  line-height: 1.6;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.dimension-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.dimension-item {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.dimension-label {
+  width: 140rpx;
+  font-size: 28rpx;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.dimension-bar {
+  flex: 1;
+  display: flex;
+  gap: 12rpx;
+}
+
+.dimension-option {
+  flex: 1;
+  padding: 20rpx 0;
+  text-align: center;
+  background: #f5f3f0;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #999;
+  border: 2rpx solid transparent;
+}
+
+.dimension-option.active {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: #d4af37;
+  color: #b8941f;
+  font-weight: 600;
+}
+
+/* 底部操作 */
+.result-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24rpx 32rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1rpx solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  gap: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16rpx;
+  border: none;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.action-btn.primary {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.action-btn.secondary {
+  background: #f5f3f0;
+  color: #333;
 }

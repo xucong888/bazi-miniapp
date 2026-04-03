@@ -6,13 +6,62 @@
         <view class="brand-icon">☯</view>
         <view class="brand-text">
           <text class="brand-name">悬壶承光</text>
-          <text class="brand-tagline">八字 · 紫微 · 占星</text>
+          <text class="brand-tagline">八字 · 紫微 · 占星 · MBTI</text>
         </view>
       </view>
     </view>
   </view>
 
   <view class="main-content">
+    <!-- 测算体系选择 -->
+    <view class="section-card">
+      <view class="section-header">
+        <view class="section-indicator"></view>
+        <text class="section-title">选择测算体系</text>
+      </view>
+
+      <view class="system-grid">
+        <view 
+          class="system-item {{selectedSystems.includes('bazi') ? 'active' : ''}}"
+          bindtap="onSystemChange"
+          data-system="bazi"
+        >
+          <text class="system-icon">☯</text>
+          <text class="system-name">八字命理</text>
+          <text class="system-desc">四柱五行</text>
+        </view>
+
+        <view 
+          class="system-item {{selectedSystems.includes('ziwei') ? 'active' : ''}}"
+          bindtap="onSystemChange"
+          data-system="ziwei"
+        >
+          <text class="system-icon">⭐</text>
+          <text class="system-name">紫微斗数</text>
+          <text class="system-desc">十二宫位</text>
+        </view>
+
+        <view 
+          class="system-item {{selectedSystems.includes('western') ? 'active' : ''}}"
+          bindtap="onSystemChange"
+          data-system="western"
+        >
+          <text class="system-icon">🌙</text>
+          <text class="system-name">西方占星</text>
+          <text class="system-desc">星座星盘</text>
+        </view>
+
+        <view 
+          class="system-item {{showMbti ? 'active' : ''}}"
+          bindtap="toggleMbti"
+        >
+          <text class="system-icon">🧠</text>
+          <text class="system-name">MBTI</text>
+          <text class="system-desc">人格分析</text>
+        </view>
+      </view>
+    </view>
+
     <!-- 基本信息 -->
     <view class="section-card">
       <view class="section-header">
@@ -21,10 +70,10 @@
       </view>
 
       <view class="form-group">
-        <label class="form-label">姓名</label>
+        <label class="form-label">您的姓名</label>
         <input 
           class="form-control" 
-          placeholder="请输入您的姓名"
+          placeholder="请输入姓名"
           value="{{birthInfo.name}}"
           bindinput="onNameInput"
         />
@@ -123,6 +172,92 @@
       </view>
     </view>
 
+    <!-- MBTI 选择 -->
+    <view class="section-card" wx:if="{{showMbti}}">
+      <view class="section-header">
+        <view class="section-indicator"></view>
+        <text class="section-title">MBTI 人格类型</text>
+      </view>
+
+      <view class="mbti-grid">
+        <view class="mbti-dimension">
+          <text class="mbti-label">能量倾向</text>
+          <view class="mbti-options">
+            <view 
+              class="mbti-btn {{mbti.energy === 'E' ? 'active' : ''}}"
+              bindtap="onMbtiChange"
+              data-dimension="energy"
+              data-value="E"
+            >E 外向</view>
+            <view 
+              class="mbti-btn {{mbti.energy === 'I' ? 'active' : ''}}"
+              bindtap="onMbtiChange"
+              data-dimension="energy"
+              data-value="I"
+            >I 内向</view>
+          </view>
+        </view>
+
+        <view class="mbti-dimension">
+          <text class="mbti-label">认知方式</text>
+          <view class="mbti-options">
+            <view 
+              class="mbti-btn {{mbti.perception === 'S' ? 'active' : ''}}"
+              bindtap="onMbtiChange"
+              data-dimension="perception"
+              data-value="S"
+            >S 实感</view>
+            <view 
+              class="mbti-btn {{mbti.perception === 'N' ? 'active' : ''}}"
+              bindtap="onMbtiChange"
+              data-dimension="perception"
+              data-value="N"
+            >N 直觉</view>
+          </view>
+        </view>
+
+        <view class="mbti-dimension">
+          <text class="mbti-label">判断方式</text>
+          <view class="mbti-options">
+            <view 
+              class="mbti-btn {{mbti.judgment === 'T' ? 'active' : ''}}"
+              bindtap="onMbtiChange"
+              data-dimension="judgment"
+              data-value="T"
+            >T 思考</view>
+            <view 
+              class="mbti-btn {{mbti.judgment === 'F' ? 'active' : ''}}"
+              bindtap="onMbtiChange"
+              data-dimension="judgment"
+              data-value="F"
+            >F 情感</view>
+          </view>
+        </view>
+
+        <view class="mbti-dimension">
+          <text class="mbti-label">生活方式</text>
+          <view class="mbti-options">
+            <view 
+              class="mbti-btn {{mbti.lifestyle === 'J' ? 'active' : ''}}"
+              bindtap="onMbtiChange"
+              data-dimension="lifestyle"
+              data-value="J"
+            >J 判断</view>
+            <view 
+              class="mbti-btn {{mbti.lifestyle === 'P' ? 'active' : ''}}"
+              bindtap="onMbtiChange"
+              data-dimension="lifestyle"
+              data-value="P"
+            >P 感知</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="mbti-result">
+        <text class="mbti-type">{{mbti.energy}}{{mbti.perception}}{{mbti.judgment}}{{mbti.lifestyle}}</text>
+      </view>
+    </view>
+
     <!-- 提交按钮 -->
     <view class="action-area">
       <button 
@@ -131,7 +266,7 @@
         disabled="{{loading}}"
       >
         <text class="btn-icon">✦</text>
-        <text class="btn-label">{{loading ? '排盘中...' : '开始排盘'}}</text>
+        <text class="btn-label">{{loading ? '排盘中...' : '开始测算'}}</text>
       </button>
 
       <view class="helper-text">

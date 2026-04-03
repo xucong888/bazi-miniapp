@@ -1,23 +1,32 @@
 Page({
   data: {
     birthInfo: {
-      name: '',
+      name: '徐聪',
       gender: 'male',
       calendarType: 'solar',
-      year: 1990,
-      month: 1,
-      day: 1,
-      hour: 12,
-      minute: 0
+      isLeap: false,
+      year: 1996,
+      month: 5,
+      day: 8,
+      hour: 8,
+      minute: 30
     },
+    mbti: {
+      energy: 'I',
+      perception: 'N',
+      judgment: 'F',
+      lifestyle: 'P'
+    },
+    selectedSystems: ['bazi', 'ziwei'],
+    showMbti: false,
     years: [],
     months: [],
     days: [],
     hours: [],
-    yearIndex: 30,
-    monthIndex: 0,
-    dayIndex: 0,
-    hourIndex: 12,
+    yearIndex: 96,
+    monthIndex: 4,
+    dayIndex: 7,
+    hourIndex: 8,
     loading: false
   },
 
@@ -39,20 +48,24 @@ Page({
     this.setData({ years, months, days, hours })
   },
 
+  // 姓名输入
   onNameInput(e) {
     this.setData({ 'birthInfo.name': e.detail.value })
   },
 
+  // 性别选择
   onGenderChange(e) {
     const value = e.currentTarget.dataset.value
     this.setData({ 'birthInfo.gender': value })
   },
 
+  // 历法选择
   onCalendarChange(e) {
     const value = e.currentTarget.dataset.value
     this.setData({ 'birthInfo.calendarType': value })
   },
 
+  // 年份选择
   onYearChange(e) {
     const index = e.detail.value
     this.setData({
@@ -61,6 +74,7 @@ Page({
     })
   },
 
+  // 月份选择
   onMonthChange(e) {
     const index = e.detail.value
     this.setData({
@@ -70,6 +84,7 @@ Page({
     this.updateDays()
   },
 
+  // 日期选择
   onDayChange(e) {
     const index = e.detail.value
     this.setData({
@@ -78,6 +93,7 @@ Page({
     })
   },
 
+  // 时辰选择
   onHourChange(e) {
     const index = e.detail.value
     this.setData({
@@ -86,6 +102,7 @@ Page({
     })
   },
 
+  // 更新日期天数
   updateDays() {
     const { birthInfo } = this.data
     const daysInMonth = new Date(birthInfo.year, birthInfo.month, 0).getDate()
@@ -94,50 +111,76 @@ Page({
     this.setData({ days })
   },
 
+  // 切换 MBTI 显示
+  toggleMbti() {
+    this.setData({ showMbti: !this.data.showMbti })
+  },
+
+  // MBTI 维度选择
+  onMbtiChange(e) {
+    const { dimension, value } = e.currentTarget.dataset
+    this.setData({ [`mbti.${dimension}`]: value })
+  },
+
+  // 体系选择
+  onSystemChange(e) {
+    const system = e.currentTarget.dataset.system
+    const { selectedSystems } = this.data
+    
+    if (selectedSystems.includes(system)) {
+      this.setData({
+        selectedSystems: selectedSystems.filter(s => s !== system)
+      })
+    } else {
+      this.setData({
+        selectedSystems: [...selectedSystems, system]
+      })
+    }
+  },
+
+  // 开始排盘
   async calculateFate() {
-    const { birthInfo } = this.data
+    const { birthInfo, mbti, showMbti, selectedSystems } = this.data
     
     if (!birthInfo.name.trim()) {
       wx.showToast({ title: '请输入姓名', icon: 'none' })
+      return
+    }
+
+    if (selectedSystems.length === 0) {
+      wx.showToast({ title: '请至少选择一个测算体系', icon: 'none' })
       return
     }
     
     this.setData({ loading: true })
     
     try {
-      // 调用云函数计算八字
-      const baziResult = await wx.cloud.callFunction({
+      // 调用云函数计算所有体系
+      const result = await wx.cloud.callFunction({
         name: 'fateEngine',
-        data: { type: 'bazi', data: birthInfo }
-      })
-      
-      // 调用云函数计算紫微
-      const ziweiResult = await wx.cloud.callFunction({
-        name: 'fateEngine',
-        data: { type: 'ziwei', data: birthInfo }
-      })
-      
-      // 调用云函数计算西方占星
-      const westernResult = await wx.cloud.callFunction({
-        name: 'fateEngine',
-        data: { type: 'western', data: birthInfo }
-      })
-      
-      if (baziResult.result.success) {
-        const resultData = {
-          bazi: baziResult.result.data,
-          ziwei: ziweiResult.result.data,
-          western: westernResult.result.data,
-          birthInfo
+        data: {
+          type: 'all',
+          data: {
+            birthInfo,
+            mbti: showMbti ? mbti : null
+          }
         }
+      })
+      
+      if (result.result.success) {
+        // 保存结果
+        wx.setStorageSync('currentResult', result.result.data)
+        wx.setStorageSync('selectedSystems', selectedSystems)
         
-        wx.setStorageSync('currentResult', resultData)
-        
+        // 跳转到结果页
         wx.navigateTo({
           url: '/pages/result/result'
         })
       } else {
-        wx.showToast({ title: baziResult.result.message || '排盘失败', icon: 'none' })
+        wx.showToast({
+          title: result.result.message || '排盘失败',
+          icon: 'none'
+        })
       }
     } catch (error) {
       console.error('排盘错误:', error)
