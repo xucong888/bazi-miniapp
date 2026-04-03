@@ -44,11 +44,13 @@ Page({
   },
 
   onGenderChange(e) {
-    this.setData({ 'birthInfo.gender': e.detail.value })
+    const value = e.currentTarget.dataset.value
+    this.setData({ 'birthInfo.gender': value })
   },
 
   onCalendarChange(e) {
-    this.setData({ 'birthInfo.calendarType': e.detail.value })
+    const value = e.currentTarget.dataset.value
+    this.setData({ 'birthInfo.calendarType': value })
   },
 
   onYearChange(e) {

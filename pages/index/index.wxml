@@ -1,70 +1,146 @@
-<view class="container">
-  <view class="header">
-    <text class="title">八字排盘</text>
-    <text class="subtitle">探索您的命理奥秘</text>
-  </view>
-
-  <view class="card">
-    <view class="card-title">基本信息</view>
-    
-    <view class="input-group">
-      <text class="input-label">姓名</text>
-      <input class="input-field" placeholder="请输入您的姓名" value="{{birthInfo.name}}" bindinput="onNameInput" />
-    </view>
-
-    <view class="input-group">
-      <text class="input-label">性别</text>
-      <radio-group bindchange="onGenderChange">
-        <label class="radio-item"><radio value="male" checked="{{birthInfo.gender === 'male'}}" /><text>男</text></label>
-        <label class="radio-item"><radio value="female" checked="{{birthInfo.gender === 'female'}}" /><text>女</text></label>
-      </radio-group>
-    </view>
-  </view>
-
-  <view class="card">
-    <view class="card-title">出生时间</view>
-    
-    <view class="input-group">
-      <text class="input-label">历法</text>
-      <radio-group bindchange="onCalendarChange">
-        <label class="radio-item"><radio value="solar" checked="{{birthInfo.calendarType === 'solar'}}" /><text>公历</text></label>
-        <label class="radio-item"><radio value="lunar" checked="{{birthInfo.calendarType === 'lunar'}}" /><text>农历</text></label>
-      </radio-group>
-    </view>
-
-    <view class="picker-group">
-      <view class="picker-item">
-        <text class="picker-label">年</text>
-        <picker mode="selector" range="{{years}}" value="{{yearIndex}}" bindchange="onYearChange">
-          <view class="picker-value">{{years[yearIndex]}}</view>
-        </picker>
-      </view>
-      <view class="picker-item">
-        <text class="picker-label">月</text>
-        <picker mode="selector" range="{{months}}" value="{{monthIndex}}" bindchange="onMonthChange">
-          <view class="picker-value">{{months[monthIndex]}}</view>
-        </picker>
-      </view>
-      <view class="picker-item">
-        <text class="picker-label">日</text>
-        <picker mode="selector" range="{{days}}" value="{{dayIndex}}" bindchange="onDayChange">
-          <view class="picker-value">{{days[dayIndex]}}</view>
-        </picker>
-      </view>
-      <view class="picker-item">
-        <text class="picker-label">时</text>
-        <picker mode="selector" range="{{hours}}" value="{{hourIndex}}" bindchange="onHourChange">
-          <view class="picker-value">{{hours[hourIndex]}}</view>
-        </picker>
+<view class="page-container">
+  <!-- 顶部装饰背景 -->
+  <view class="header-bg">
+    <view class="header-content">
+      <view class="logo-section">
+        <view class="logo-icon">☯</view>
+        <view class="logo-text">
+          <text class="app-name">悬壶承光</text>
+          <text class="app-slogan">八字 · 紫微 · 占星</text>
+        </view>
       </view>
     </view>
   </view>
 
-  <button class="btn-primary" bindtap="calculateFate" loading="{{loading}}" disabled="{{loading}}">
-    {{loading ? '排盘中...' : '开始排盘'}}
-  </button>
+  <view class="content-wrapper">
+    <!-- 基本信息卡片 -->
+    <view class="form-card">
+      <view class="section-title">
+        <view class="section-icon">👤</view>
+        <text>基本信息</text>
+      </view>
+      
+      <view class="form-item">
+        <view class="form-label">您的姓名</view>
+        <input 
+          class="form-input" 
+          placeholder="请输入姓名"
+          value="{{birthInfo.name}}"
+          bindinput="onNameInput"
+        />
+      </view>
 
-  <view class="tips">
-    <text>排盘需要消耗积分，首次使用赠送100积分</text>
+      <view class="form-item">
+        <view class="form-label">性别</view>
+        <view class="gender-selector">
+          <view 
+            class="gender-option {{birthInfo.gender === 'male' ? 'active' : ''}}" 
+            bindtap="onGenderChange" 
+            data-value="male"
+          >
+            <text class="gender-icon">♂</text>
+            <text class="gender-text">男</text>
+          </view>
+          <view 
+            class="gender-option {{birthInfo.gender === 'female' ? 'active' : ''}}" 
+            bindtap="onGenderChange" 
+            data-value="female"
+          >
+            <text class="gender-icon">♀</text>
+            <text class="gender-text">女</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 出生时间卡片 -->
+    <view class="form-card">
+      <view class="section-title">
+        <view class="section-icon">📅</view>
+        <text>出生时间</text>
+      </view>
+      
+      <view class="form-item">
+        <view class="form-label">历法类型</view>
+        <view class="calendar-selector">
+          <view 
+            class="calendar-option {{birthInfo.calendarType === 'solar' ? 'active' : ''}}"
+            bindtap="onCalendarChange"
+            data-value="solar"
+          >
+            <text>公历</text>
+          </view>
+          <view 
+            class="calendar-option {{birthInfo.calendarType === 'lunar' ? 'active' : ''}}"
+            bindtap="onCalendarChange"
+            data-value="lunar"
+          >
+            <text>农历</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">出生日期</view>
+        <view class="date-picker-group">
+          <view class="date-picker-item">
+            <picker mode="selector" range="{{years}}" value="{{yearIndex}}" bindchange="onYearChange">
+              <view class="date-picker-box">
+                <text class="date-picker-value">{{years[yearIndex]}}</text>
+                <text class="date-picker-arrow">▼</text>
+              </view>
+            </picker>
+          </view>
+          
+          <view class="date-picker-item">
+            <picker mode="selector" range="{{months}}" value="{{monthIndex}}" bindchange="onMonthChange">
+              <view class="date-picker-box">
+                <text class="date-picker-value">{{months[monthIndex]}}</text>
+                <text class="date-picker-arrow">▼</text>
+              </view>
+            </picker>
+          </view>
+          
+          <view class="date-picker-item">
+            <picker mode="selector" range="{{days}}" value="{{dayIndex}}" bindchange="onDayChange">
+              <view class="date-picker-box">
+                <text class="date-picker-value">{{days[dayIndex]}}</text>
+                <text class="date-picker-arrow">▼</text>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">出生时辰</view>
+        <view class="time-picker">
+          <picker mode="selector" range="{{hours}}" value="{{hourIndex}}" bindchange="onHourChange">
+            <view class="time-picker-box">
+              <text class="time-picker-value">{{hours[hourIndex]}}</text>
+              <text class="time-picker-hint">选择时辰</text>
+              <text class="time-picker-arrow">▼</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <!-- 开始排盘按钮 -->
+    <view class="action-section">
+      <button 
+        class="submit-btn {{loading ? 'loading' : ''}}" 
+        bindtap="calculateFate"
+        disabled="{{loading}}"
+      >
+        <text class="btn-icon">✨</text>
+        <text class="btn-text">{{loading ? '排盘中...' : '开始排盘'}}</text>
+      </button>
+
+      <view class="tips-section">
+        <text class="tips-icon">💡</text>
+        <text class="tips-text">首次使用赠送100积分</text>
+      </view>
+    </view>
   </view>
 </view>
