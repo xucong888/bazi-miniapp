@@ -230,11 +230,11 @@
   transition: width 0.5s ease;
 }
 
-.wuxing-fill.木 { background: #52c41a; }
-.wuxing-fill.火 { background: #f5222d; }
-.wuxing-fill.土 { background: #faad14; }
-.wuxing-fill.金 { background: #fa8c16; }
-.wuxing-fill.水 { background: #1890ff; }
+.wuxing-fill.mu { background: #52c41a; }
+.wuxing-fill.huo { background: #f5222d; }
+.wuxing-fill.tu { background: #faad14; }
+.wuxing-fill.jin { background: #fa8c16; }
+.wuxing-fill.shui { background: #1890ff; }
 
 .wuxing-info {
   display: flex;

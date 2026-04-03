@@ -110,7 +110,7 @@
         <view class="wuxing-item" wx:for="{{result.bazi.fiveElements}}" wx:for-item="item" wx:for-index="key">
           <text class="wuxing-name">{{key}}</text>
           <view class="wuxing-bar">
-            <view class="wuxing-fill {{key}}" style="width: {{item.percentage}}%"></view>
+            <view class="wuxing-fill {{key === '木' ? 'mu' : key === '火' ? 'huo' : key === '土' ? 'tu' : key === '金' ? 'jin' : 'shui'}}" style="width: {{item.percentage}}%"></view>
           </view>
           <view class="wuxing-info">
             <text class="wuxing-percent">{{item.percentage}}%</text>
